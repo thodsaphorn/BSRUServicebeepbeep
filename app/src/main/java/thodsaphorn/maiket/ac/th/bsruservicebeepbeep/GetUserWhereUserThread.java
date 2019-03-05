@@ -9,11 +9,11 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-public class AddUserThread extends AsyncTask<String,Void,String> {
+public class GetUserWhereUserThread extends AsyncTask<String,Void,String> {
 
     private Context context;
 
-    public AddUserThread(Context context) {
+    public GetUserWhereUserThread(Context context) {
         this.context = context;
     }
 
@@ -25,19 +25,13 @@ public class AddUserThread extends AsyncTask<String,Void,String> {
             OkHttpClient okHttpClient = new OkHttpClient();
             RequestBody requestBody = new FormEncodingBuilder()
                     .add("isAdd","true")
-                    .add("Name",strings[0])
-                    .add("User",strings[1])
-                    .add("Password",strings[2])
-                    .add("Gender",strings[3])
+                    .add("User",strings[0])
                     .build();
-
             Request.Builder builder = new Request.Builder();
-            Request request = builder.url(strings[4]).post(requestBody).build();
+            Request request = builder.url(strings[1]).post(requestBody).build();
             Response response = okHttpClient.newCall(request).execute();
-            return response.body().string();
 
-
-
+            return  response.body().string();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,4 +40,3 @@ public class AddUserThread extends AsyncTask<String,Void,String> {
 
     }
 }
-
